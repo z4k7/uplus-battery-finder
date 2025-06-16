@@ -34,4 +34,49 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+// @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* src/global.scss */
+/* Custom dark mode variables */
+:root {
+  --ion-color-primary: #3880ff;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-background-color: #ffffff;
+  --ion-toolbar-background: #f8f8f8;
+  --ion-toolbar-color: #000000;
+  --ion-text-color: #000000;
+  --ion-item-background: #ffffff;
+  --ion-title-color: #000000;
+
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+  
+  --card-border-radius: 12px;
+  --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --card-padding: 16px;
+  
+  
+}
+
+.dark {
+  --ion-color-primary: #0f62fe;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-background-color: #121212;
+  --ion-toolbar-background: #1a1a1a;
+  --ion-toolbar-color: #ffffff;
+  --ion-text-color: #ffffff;
+  --ion-item-background: #1a1a1a;
+  --ion-color-light: #ffffff;
+  --ion-color-light-shade: #d1d1d1;
+  --ion-title-color: #ffffff;
+    --card-bg: #2a2a2a;
+  --card-text: #f0f0f0;
+  --search-bg: #333333;
+  --border-color: #444;
+}
+
+ion-title {
+  color: var(--ion-title-color);
+}

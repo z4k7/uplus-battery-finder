@@ -1,0 +1,164 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="flash-outline" class="header-icon"></ion-icon>
+    </ion-buttons>
+
+    <ion-title>Uplus Battery Finder</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="toggleDarkTheme()" class="theme-toggle">
+        <ion-icon [name]="isDarkMode ? 'sunny' : 'moon'" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="search-container">
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      (ionInput)="searchTermChanged.next(searchTerm)"
+      placeholder="Search by vehicle name"
+      [disabled]="isLoading"
+      class="modern-searchbar"
+      animated
+      clearIcon="close-circle"
+    ></ion-searchbar>
+
+    <div class="filter-row">
+      <ion-item lines="none" class="brand-filter">
+        <ion-label position="stacked">Filter by Brand</ion-label>
+        <ion-select
+          [(ngModel)]="selectedBrand"
+          (ionChange)="filterByBrand()"
+          [disabled]="isLoading"
+          interface="popover"
+        >
+          <ion-select-option value="">All Brands</ion-select-option>
+          <ion-select-option *ngFor="let brand of allBrands" [value]="brand">
+            {{ brand }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button fill="clear" (click)="resetSearch()" class="clear-btn">
+        <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="searchTerm && !isLoading && searchResults.length === 0" class="no-results">
+    <ion-icon name="search-outline" class="search-icon"></ion-icon>
+    <ion-text>No results found for "{{ searchTerm }}"</ion-text>
+    <ion-text *ngIf="selectedBrand" class="hint-text">Try removing brand filter</ion-text>
+  </div>
+
+  <!-- AI Suggestions Section -->
+<!-- Replace the entire AI Suggestions Section with: -->
+<ng-container *ngIf="aiSearchResults && aiSearchResults.length > 0 && !isLoading">
+  <div class="ai-suggestion-header">
+    <ion-text color="primary">AI-Powered Suggestions</ion-text>
+    <ion-chip color="primary" outline class="ai-tag">
+      <ion-icon name="logo-google" color="primary"></ion-icon>
+      <ion-label>Gemini</ion-label>
+    </ion-chip>
+  </div>
+
+  <ion-card *ngFor="let result of aiSearchResults" class="battery-card ai-suggestion-card">
+    <ion-card-header>
+      <ion-card-subtitle>{{ result.vehicle_brand }}</ion-card-subtitle>
+      <ion-card-title>{{ result.vehicle_name }}</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <div class="spec-row">
+        <ion-icon name="battery-charging-outline" class="spec-icon"></ion-icon>
+        <div>
+          <div class="spec-label">Battery Model</div>
+          <div class="spec-value">{{ result.battery_model }}</div>
+        </div>
+      </div>
+      
+      <div class="spec-row">
+        <ion-icon name="speedometer-outline" class="spec-icon"></ion-icon>
+        <div>
+          <div class="spec-label">Capacity</div>
+          <div class="spec-value">{{ result.battery_capacity }} Ah</div>
+        </div>
+      </div>
+      
+      <div class="spec-row">
+        <ion-icon name="shield-checkmark-outline" class="spec-icon"></ion-icon>
+        <div>
+          <div class="spec-label">Warranty</div>
+          <div class="spec-value">{{ result.warranty_months }} months</div>
+        </div>
+      </div>
+      
+      <div class="spec-row" *ngIf="result.notes">
+        <ion-icon name="information-circle-outline" class="spec-icon"></ion-icon>
+        <div>
+          <div class="spec-label">Notes</div>
+          <div class="spec-value">{{ result.notes }}</div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
+
+
+  <!-- Results Section -->
+  <div class="results-container">
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="loading-spinner">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <ion-text>Searching...</ion-text>
+    </div>
+
+
+    <!-- Battery Cards -->
+    <ion-card *ngFor="let result of searchResults" class="battery-card">
+      <ion-card-header>
+        <ion-card-subtitle>{{ result.vehicle_brand }}</ion-card-subtitle>
+        <ion-card-title>{{ result.vehicle_name }}</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="spec-row">
+          <ion-icon name="battery-charging-outline" class="spec-icon"></ion-icon>
+          <div>
+            <div class="spec-label">Battery Model</div>
+            <div class="spec-value">{{ result.battery_model }}</div>
+          </div>
+        </div>
+        
+        <div class="spec-row">
+          <ion-icon name="speedometer-outline" class="spec-icon"></ion-icon>
+          <div>
+            <div class="spec-label">Capacity</div>
+            <div class="spec-value">{{ result.battery_capacity }} Ah</div>
+          </div>
+        </div>
+        
+        <div class="spec-row">
+          <ion-icon name="shield-checkmark-outline" class="spec-icon"></ion-icon>
+          <div>
+            <div class="spec-label">Warranty</div>
+            <div class="spec-value">{{ result.warranty_months }} months</div>
+          </div>
+        </div>
+        
+        <div class="spec-row">
+          <ion-icon name="color-filter-outline" class="spec-icon"></ion-icon>
+          <div>
+            <div class="spec-label">Fuel Type</div>
+            <div class="spec-value">{{ result.fuel_type }}</div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+

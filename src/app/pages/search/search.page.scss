@@ -1,0 +1,318 @@
+/* Header Styles */
+.custom-header {
+  --background: linear-gradient(
+    135deg,
+    var(--ion-color-primary) 0%,
+    #4c8dff 100%
+  );
+  --border-width: 0;
+  --color: var(--ion-text-color);
+
+  ion-toolbar {
+    --background: transparent;
+    --color: var(--ion-text-color);
+    padding-top: 8px;
+  }
+
+  .header-icon {
+    font-size: 28px;
+    margin-right: 8px;
+  }
+
+  ion-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .theme-toggle {
+    --color: var(--ion-text-color);
+    --background-hover: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Search Container */
+.search-container {
+  margin-bottom: 20px;
+
+  .modern-searchbar {
+    --background: var(--search-bg, #f5f5f5);
+    --border-radius: 10px;
+    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 0;
+    margin-bottom: 12px;
+    --color:var(--ion-text-color);
+
+    .searchbar-input-container {
+      input {
+        font-size: 14px;
+    }
+    }
+  }
+
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .brand-filter {
+      --background: var(--search-bg, #f5f5f5);
+      --border-radius: 10px;
+      --padding-start: 12px;
+      --padding-end: 12px;
+      flex: 1;
+
+      ion-select {
+        --padding-start: 0;
+        --padding-end: 0;
+      }
+    }
+
+    .clear-btn {
+      --padding-start: 8px;
+      --padding-end: 8px;
+      --border-radius: 10px;
+      height: 48px;
+      width: 48px;
+      --background: var(--search-bg, #f5f5f5);
+    }
+  }
+}
+
+/* Battery Cards */
+.battery-card {
+  --background: var(--card-bg, white);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  ion-card-header {
+    padding-bottom: 8px;
+
+    ion-card-subtitle {
+      color: var(--ion-color-primary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    ion-card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ion-text-color);
+    }
+  }
+
+  ion-card-content {
+    padding: 12px var(--card-padding);
+
+    .spec-row {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color, #eee);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .spec-icon {
+        font-size: 20px;
+        color: var(--ion-color-primary);
+        margin-right: 12px;
+        min-width: 24px;
+      }
+
+      .spec-label {
+        font-size: 0.8rem;
+        color: var(--ion-color-medium);
+        margin-bottom: 2px;
+      }
+
+      .spec-value {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--ion-text-color);
+      }
+    }
+  }
+}
+
+/* Loading & No Results States */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+
+  ion-spinner {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 16px;
+  }
+
+  ion-text {
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+  }
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+
+  .search-icon {
+    font-size: 48px;
+    color: var(--ion-color-medium);
+    margin-bottom: 16px;
+  }
+
+  ion-text {
+    color: var(--ion-color-medium);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .hint-text {
+    font-size: 0.85rem;
+    color: var(--ion-color-primary);
+  }
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .search-container {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+
+    .battery-card {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* AI Suggestions Styling */
+.ai-suggestion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0 16px;
+  
+  ion-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .ai-tag {
+    ion-icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+.ai-suggestion-card {
+  --background: rgba(var(--ion-color-primary-rgb), 0.05);
+  border: 1px solid rgba(var(--ion-color-primary-rgb), 0.1);
+  border-radius: 12px;
+  
+  ion-row {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(var(--ion-color-primary-rgb), 0.1);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  .ai-label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: var(--ion-color-primary);
+    
+    ion-icon {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+  }
+  
+  .ai-value {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+  }
+  
+  .ai-notes {
+    padding-top: 12px;
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+/* Add these styles to your existing SCSS */
+
+/* AI Suggestion Cards */
+.ai-suggestion-card {
+  --background: rgba(var(--ion-color-primary-rgb), 0.05);
+  border-left: 4px solid var(--ion-color-primary);
+  
+  ion-card-header {
+    ion-card-subtitle {
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  .spec-row {
+    border-bottom: 1px dashed rgba(var(--ion-color-primary-rgb), 0.2);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+/* No Results Styling */
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  
+  ion-icon {
+    font-size: 48px;
+    color: var(--ion-color-medium);
+    margin-bottom: 16px;
+  }
+  
+  ion-text {
+    display: block;
+    color: var(--ion-color-medium);
+    margin-bottom: 8px;
+  }
+  
+  .try-ai {
+    margin-top: 20px;
+    ion-button {
+      --background: rgba(var(--ion-color-primary-rgb), 0.1);
+      --color: var(--ion-color-primary);
+    }
+  }
+}
